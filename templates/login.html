@@ -1,0 +1,13 @@
+<!DOCTYPE html><html><head><title>ABCEND - Login</title>
+<style>body{background:#0F2340;display:flex;justify-content:center;align-items:center;height:100vh;font-family:Arial;margin:0}
+.box{background:white;padding:40px;border-radius:12px;width:340px;text-align:center}
+input{width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:8px;box-sizing:border-box}
+button{width:100%;padding:12px;background:#FF6B00;color:white;border:none;border-radius:8px;font-weight:bold;cursor:pointer}
+</style></head>
+<body><div class="box">
+<div style="font-size:42px">⚙️</div><div style="font-size:24px;font-weight:900;color:#0F2340">ABCEND</div>
+<div style="color:#FF6B00;font-weight:bold;margin-bottom:20px">SPARE PARTS</div>
+{% if error %}<p style="color:red">{{error}}</p>{% endif %}
+<form method="POST"><input name="username" placeholder="Username"><input name="password" type="password" placeholder="Password"><button>LOGIN</button></form>
+<p style="font-size:12px;color:#888">Owner: jameel / admin123<br>Others: store, sales, support, delivery, account / 1234</p>
+</div></body></html>

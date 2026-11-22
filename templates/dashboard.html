@@ -1,0 +1,40 @@
+<!DOCTYPE html><html><head><title>ABCEND Dashboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{display:flex;background:#F4F6F9}
+.sidebar{width:240px;background:#0F2340;color:white;min-height:100vh;padding:20px}
+.sidebar a{display:block;color:#D0D8E8;text-decoration:none;padding:12px;border-radius:8px;margin-top:6px}
+.sidebar a.active,.sidebar a:hover{background:#FF6B00;color:white}
+.main{flex:1;padding:25px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.top input{padding:10px;width:350px;border:1px solid #ddd;border-radius:8px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:20px}
+.card{background:white;padding:20px;border-radius:12px}
+table{width:100%;background:white;border-collapse:collapse}
+th,td{padding:12px;text-align:left;border-bottom:1px solid #eee}th{background:#0F2340;color:white}
+</style></head>
+<body>
+<div class="sidebar">
+<div style="font-size:36px">⚙️</div><h2>ABCEND</h2><span style="color:#FF6B00">SPARE PARTS</span><br><br>
+<a href="/dashboard" class="active">📊 Dashboard</a>
+{% if 'stock' in perms %}<a href="/stock">📦 Stock</a>{% endif %}
+{% if 'sales' in perms %}<a href="/sales">🧾 Sales / Invoices</a>{% endif %}
+{% if 'support' in perms %}<a href="/support">💬 Customer Support</a>{% endif %}
+{% if 'delivery' in perms %}<a href="/delivery">🚚 Delivery</a>{% endif %}
+{% if 'finance' in perms %}<a href="/finance">💰 Finance</a>{% endif %}
+{% if 'users' in perms %}<a href="/users">👥 Manage Users</a>{% endif %}
+<br><a href="/logout">🚪 Logout</a>
+</div>
+<div class="main">
+<div class="top"><div><h2>Welcome, {{user.name}} 👋</h2><p style="color:#888">{{user.role}} • Lagos, Nigeria</p></div>
+<input placeholder="🔍 Search parts..."></div>
+<div class="cards">
+<div class="card"><small>Total Sales Today</small><h3>₦485,000</h3></div>
+<div class="card"><small>Total Stock Items</small><h3>{{products|length}} Products</h3></div>
+<div class="card"><small>Total Profit</small><h3>₦98,500</h3></div>
+<div class="card"><small>Low Stock Alert</small><h3 style="color:red">{{low|length}} Items</h3></div>
+</div>
+<table><tr><th>Product</th><th>Category</th><th>Qty</th><th>Price</th><th>Status</th></tr>
+{% for p in products %}<tr><td>{{p.name}}</td><td>{{p.cat}}</td><td>{{p.qty}}</td><td>₦{{p.price}}</td><td>{% if p.qty < 5 %}Low Stock{% else %}In Stock{% endif %}</td></tr>{% endfor %}
+</table>
+</div></body></html>
